@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { ref, set } from "firebase/database";
-import { database } from "../firebaseConfig";
+import { database } from "../firebaseConfig";0
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 export default function RegisterScreen({ navigation }: any) {
   const [name, setName] = useState("");
@@ -24,12 +26,19 @@ export default function RegisterScreen({ navigation }: any) {
       licensePlate,
     })
       .then(() => {
+        const saveUserAndNavigate = async () => {
+            await AsyncStorage.setItem("user", JSON.stringify({
+                email,
+                licensePlate,
+        }));          
         Alert.alert("Registration successful!");
         navigation.navigate("Home");
-      })
-      .catch((error) => {
+      };
+      saveUserAndNavigate();
+    })
+    .catch((error) => {
         Alert.alert("Registration failed", error.message);
-      });
+    });
   };
 
   return (
