@@ -9,7 +9,7 @@ export default function HomeScreen({ navigation }: any) {
       await AsyncStorage.removeItem("user");
       navigation.reset({
         index: 0,
-        routes: [{ name: "Register" }],
+        routes: [{ name: "Login" }],
       });
     };
   

@@ -1,16 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, Button, Alert, StyleSheet } from "react-native";
 import { ref, push, update } from "firebase/database";
 import { database } from "../firebaseConfig";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const licensePlate = "AB12CDE";
 const ratePerHour = 1.5;
 
 export default function ParkingActionScreen() {
   const [entryKey, setEntryKey] = useState<string | null>(null);
   const [entryTime, setEntryTime] = useState<string | null>(null);
+  const [licensePlate, setLicensePlate] = useState<string | null>(null);
+
+  // ✅ 从 AsyncStorage 获取当前用户车牌号
+  useEffect(() => {
+    AsyncStorage.getItem("user").then((data) => {
+      if (data) {
+        const parsed = JSON.parse(data);
+        setLicensePlate(parsed.licensePlate);
+      } else {
+        Alert.alert("⚠️ 无法获取当前用户信息");
+      }
+    });
+  }, []);
 
   const handleEnter = async () => {
+    if (!licensePlate) {
+      Alert.alert("⚠️ 未识别用户车牌");
+      return;
+    }
+
     const now = new Date().toISOString();
     const recordRef = ref(database, `parking-records/${licensePlate}`);
     const newRecordRef = push(recordRef);
@@ -26,7 +44,7 @@ export default function ParkingActionScreen() {
   };
 
   const handleExitAndPay = async () => {
-    if (!entryKey || !entryTime) {
+    if (!licensePlate || !entryKey || !entryTime) {
       Alert.alert("⚠️ 请先点击“进场”按钮");
       return;
     }

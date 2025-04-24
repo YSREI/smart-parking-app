@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, FlatList, StyleSheet, Alert } from "react-native";
 import { ref, onValue } from "firebase/database";
 import { database } from "../firebaseConfig";
-
-const licensePlate = "AB12CDE";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 interface RecordItem {
   id: string;
@@ -16,8 +15,24 @@ interface RecordItem {
 
 export default function ParkingHistoryScreen() {
   const [records, setRecords] = useState<RecordItem[]>([]);
+  const [licensePlate, setLicensePlate] = useState<string | null>(null);
 
+  // ✅ 第一步：从 AsyncStorage 读取当前车牌号
   useEffect(() => {
+    AsyncStorage.getItem("user").then((data) => {
+      if (data) {
+        const parsed = JSON.parse(data);
+        setLicensePlate(parsed.licensePlate);
+      } else {
+        Alert.alert("⚠️ 无法识别用户身份");
+      }
+    });
+  }, []);
+
+  // ✅ 第二步：只监听当前车牌下的停车记录
+  useEffect(() => {
+    if (!licensePlate) return;
+
     const userRef = ref(database, `parking-records/${licensePlate}`);
     return onValue(userRef, (snapshot) => {
       const data = snapshot.val();
@@ -32,7 +47,7 @@ export default function ParkingHistoryScreen() {
       }));
       setRecords(parsed.reverse());
     });
-  }, []);
+  }, [licensePlate]);
 
   const renderItem = ({ item }: { item: RecordItem }) => (
     <View style={styles.card}>

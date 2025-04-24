@@ -48,9 +48,14 @@ export default function RegisterScreen({ navigation }: any) {
       <TextInput placeholder="Phone" style={styles.input} onChangeText={setPhone} />
       <TextInput placeholder="Email" style={styles.input} onChangeText={setEmail} />
       <TextInput placeholder="License Plate" style={styles.input} onChangeText={setLicensePlate} />
+      
       <Button title="Register" onPress={handleRegister} />
+      
+      {/* 👇 添加这部分按钮 */}
+      <View style={{ height: 20 }} />
+      <Button title="已有账户？前往登录" onPress={() => navigation.navigate("Login")} />
     </View>
-  );
+  );  
 }
 
 const styles = StyleSheet.create({
@@ -58,3 +63,4 @@ const styles = StyleSheet.create({
   title: { fontSize: 24, marginBottom: 20 },
   input: { borderBottomWidth: 1, marginBottom: 16, height: 40 }
 });
+
