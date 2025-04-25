@@ -15,28 +15,28 @@ export default function HomeScreen({ navigation }: any) {
   
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>欢迎使用智能停车系统</Text>
+        <Text style={styles.title}>Welcome to the Automated Parking System</Text>
   
         <Button
-          title="🅿️ 查看停车场状态"
+          title="查看停车场状态"
           onPress={() => navigation.navigate("ParkingLot", { lotId: "lot-a" })}
         />
         <View style={styles.spacer} />
   
         <Button
-          title="🚗 模拟停车进出流程"
+          title=" 模拟停车进出流程"
           onPress={() => navigation.navigate("ParkingAction")}
         />
         <View style={styles.spacer} />
   
         <Button
-          title="📄 查看历史停车记录"
+          title="Parking History"
           onPress={() => navigation.navigate("History")}
         />
         <View style={styles.spacer} />
   
         <Button
-          title="🚪 退出登录"
+          title="Logout"
           color="#f55"
           onPress={handleLogout}
         />

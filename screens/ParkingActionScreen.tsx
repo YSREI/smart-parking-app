@@ -3,6 +3,8 @@ import { View, Text, Button, Alert, StyleSheet } from "react-native";
 import { ref, push, update } from "firebase/database";
 import { database } from "../firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { get } from "firebase/database";
+
 
 const ratePerHour = 1.5;
 
@@ -25,19 +27,34 @@ export default function ParkingActionScreen() {
 
   const handleEnter = async () => {
     if (!licensePlate) {
-      Alert.alert("⚠️ 未识别用户车牌");
+      Alert.alert("⚠️ 无法获取车牌号");
       return;
     }
-
-    const now = new Date().toISOString();
+  
     const recordRef = ref(database, `parking-records/${licensePlate}`);
+  
+    // Step 1: 查询是否存在未支付记录
+    const snapshot = await get(recordRef);
+    const data = snapshot.val();
+    if (data) {
+      const hasUnpaid = Object.values(data).some(
+        (record: any) => record.paid === false
+      );
+      if (hasUnpaid) {
+        Alert.alert("🚫 已有进行中的停车记录，请先完成出场");
+        return;
+      }
+    }
+  
+    // Step 2: 正常入场逻辑
+    const now = new Date().toISOString();
     const newRecordRef = push(recordRef);
-
+  
     await update(newRecordRef, {
       entryTime: now,
       paid: false,
     });
-
+  
     setEntryKey(newRecordRef.key);
     setEntryTime(now);
     Alert.alert("✅ 车辆进场记录成功！");

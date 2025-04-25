@@ -1,50 +1,94 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ref, get } from "firebase/database";
+import { ref, get, set } from "firebase/database";
 import { database } from "../firebaseConfig";
 
 export default function LoginScreen({ navigation }: any) {
   const [email, setEmail] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [plateError, setPlateError] = useState("");
 
   const handleLogin = async () => {
-    if (!email || !licensePlate) {
-      Alert.alert("请输入邮箱和车牌号");
-      return;
+    setEmailError("");
+    setPlateError("");
+
+    let hasError = false;
+
+    if (!email) {
+      setEmailError("Email is required");
+      hasError = true;
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("Please enter a valid email address");
+      hasError = true;
     }
+
+    if (!licensePlate) {
+      setPlateError("License Plate is required");
+      hasError = true;
+    } else if (!/^[A-Z0-9 ]{5,12}$/.test(licensePlate)) {
+      setPlateError("License plate must contain only uppercase letters, digits and spaces");
+      hasError = true;
+    }
+    
+    if (hasError) return;
+    
 
     const safeEmail = email.replace(".", "_");
     const userRef = ref(database, `users/${safeEmail}`);
 
     try {
-      const snapshot = await get(userRef);
-      if (!snapshot.exists()) {
-        Alert.alert("用户不存在，请先注册");
-        return;
+        const snapshot = await get(userRef);
+        if (!snapshot.exists()) {
+          Alert.alert("User does not exist, please register");
+          return;
+        }
+      
+        const userData = snapshot.val();
+        const inputPlate = licensePlate.toUpperCase();
+      
+        if (userData.licensePlate !== inputPlate) {
+          Alert.alert("License plate does not match");
+          return;
+        }
+      
+        await AsyncStorage.setItem("user", JSON.stringify({
+          email,
+          licensePlate: inputPlate,
+        }));
+      
+        navigation.reset({ index: 0, routes: [{ name: "Home" }] });
+      
+      } catch (error) {
+        Alert.alert("Login failed", (error as any).message);
       }
-
-      const userData = snapshot.val();
-      if (userData.licensePlate !== licensePlate) {
-        Alert.alert("车牌号不匹配");
-        return;
-      }
-
-      await AsyncStorage.setItem("user", JSON.stringify({ email, licensePlate }));
-      navigation.reset({ index: 0, routes: [{ name: "Home" }] });
-    } catch (error) {
-      Alert.alert("登录失败", (error as any).message);
-    }
-  };
+    };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>登录账户</Text>
-      <TextInput placeholder="邮箱" style={styles.input} onChangeText={setEmail} autoCapitalize="none" />
-      <TextInput placeholder="车牌号" style={styles.input} onChangeText={setLicensePlate} autoCapitalize="characters" />
-      <Button title="登录" onPress={handleLogin} />
+      <Text style={styles.title}>Login to your account</Text>
+
+      <Text style={styles.label}>Email (e.g. 123456@gmail.com)</Text>
+      <TextInput 
+      //placeholder="邮箱" 
+      style={styles.input} 
+      onChangeText={setEmail} 
+      autoCapitalize="none" />
+      {emailError !== "" && <Text style = {styles.errorText}>{emailError}</Text>}
+
+      <Text style={styles.label}>License Plate (e.g. AB12 CDE)</Text>
+      <TextInput 
+      //placeholder="车牌号"
+      style = {styles.input}
+      value={licensePlate}
+      autoCapitalize="characters"
+      onChangeText={(text) => setLicensePlate(text.toUpperCase())}/>
+      {plateError !== "" && <Text style = {styles.errorText}>{plateError}</Text>}
+
+      <Button title="Login" onPress={handleLogin} />
       <View style={{ height: 20 }} />
-      <Button title="没有账户？前往注册" onPress={() => navigation.navigate("Register")} />
+      <Button title="Don't have an account? Register now" onPress={() => navigation.navigate("Register")} />
     </View>
   );
 }
@@ -52,5 +96,7 @@ export default function LoginScreen({ navigation }: any) {
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
   title: { fontSize: 24, marginBottom: 20 },
-  input: { borderBottomWidth: 1, marginBottom: 16, height: 40 }
+  input: { borderBottomWidth: 1, marginBottom: 16, height: 40 },
+  label: { marginBottom: 4, fontSize: 14, color: "#444"}, 
+  errorText : { color:'red', fontSize: 13, marginBottom: 8}
 });
