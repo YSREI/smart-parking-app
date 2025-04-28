@@ -48,7 +48,9 @@ export default function LoginScreen({ navigation }: any) {
         const userData = snapshot.val();
         const inputPlate = licensePlate.toUpperCase();
       
-        if (userData.licensePlate !== inputPlate) {
+        const licensePlates = userData.license_plates  || [];
+
+        if (!licensePlates.includes(inputPlate)) {
           Alert.alert("License plate does not match");
           return;
         }
