@@ -51,8 +51,8 @@ export default function RegisterScreen({ navigation }: any) {
     if (!licensePlate) {
       setPlateError("License Plate is required");
       hasError = true;
-    } else if (!/^[A-Z0-9 ]{5,12}$/.test(licensePlate)) {
-      setPlateError("License plate must contain only uppercase letters, digits and spaces");
+    } else if (!/^[A-Z0-9]{5,12}$/.test(licensePlate)) {
+      setPlateError("License plate must contain only uppercase letters and digits (no spaces)");
       hasError = true;
     }
 
@@ -94,12 +94,16 @@ export default function RegisterScreen({ navigation }: any) {
         
       
   
-      <Text style={styles.label}>Phone (e.g. 0XXXX XXXXXX)</Text>
+      <Text style={styles.label}>Phone (e.g. 01234567890)</Text>
       <TextInput
         //placeholder="Phone"
         style={styles.input}
-        onChangeText={setPhone}
-        keyboardType="numeric"/>
+        keyboardType="numeric"
+        onChangeText={(text) =>{
+          const onlyNumbers = text.replace(/[^0-9]/g, '');
+          setPhone(onlyNumbers);
+        }}
+        value = {phone}/>
       {phoneError !== "" && <Text style={styles.errorText}>{phoneError}</Text>}
   
       <Text style={styles.label}>Email (e.g. 123456@gmail.com)</Text>
@@ -115,8 +119,11 @@ export default function RegisterScreen({ navigation }: any) {
         //placeholder="License Plate"
         style={styles.input}
         autoCapitalize="characters"
-        value={licensePlate}
-        onChangeText={(text) => setLicensePlate(text.toUpperCase())}/>
+        onChangeText={(text) =>{
+          const onlyLettersNumbers = text.replace(/[^A-Z0-9]/gi, '').toUpperCase();
+          setLicensePlate(onlyLettersNumbers);
+        }}
+        value={licensePlate}/>
       {plateError !== "" && <Text style={styles.errorText}>{plateError}</Text>}
   
       <Button title="Register" onPress={handleRegister} />

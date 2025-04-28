@@ -28,7 +28,7 @@ export default function LoginScreen({ navigation }: any) {
       setPlateError("License Plate is required");
       hasError = true;
     } else if (!/^[A-Z0-9 ]{5,12}$/.test(licensePlate)) {
-      setPlateError("License plate must contain only uppercase letters, digits and spaces");
+      setPlateError("License plate must contain only uppercase letters and digits (no spaces)");
       hasError = true;
     }
     
@@ -81,9 +81,12 @@ export default function LoginScreen({ navigation }: any) {
       <TextInput 
       //placeholder="车牌号"
       style = {styles.input}
-      value={licensePlate}
       autoCapitalize="characters"
-      onChangeText={(text) => setLicensePlate(text.toUpperCase())}/>
+      onChangeText={(text) => {
+        const onlyLettersNumbers = text.replace(/[^A-Z0-9]/gi, '').toUpperCase(); // 只保留字母数字并转大写
+        setLicensePlate(onlyLettersNumbers);
+      }}
+      value={licensePlate}/>
       {plateError !== "" && <Text style = {styles.errorText}>{plateError}</Text>}
 
       <Button title="Login" onPress={handleLogin} />
