@@ -29,7 +29,7 @@ export default function ParkingHistoryScreen() {
     });
   }, []);
 
-  // ✅ 第二步：只监听当前车牌下的停车记录
+  // 监听当前车牌下的停车记录
   useEffect(() => {
     if (!licensePlate) return;
 
@@ -52,17 +52,17 @@ export default function ParkingHistoryScreen() {
   const renderItem = ({ item }: { item: RecordItem }) => (
     <View style={styles.card}>
       <Text style={styles.title}>🅿️ 记录编号：{item.id}</Text>
-      <Text>📥 入场时间：{item.entryTime}</Text>
-      <Text>📤 出场时间：{item.exitTime ?? "尚未离场"}</Text>
-      <Text>⏱️ 停车时长：{item.durationMinutes ?? "–"} 分钟</Text>
-      <Text>💰 费用：£{item.charge?.toFixed(2) ?? "–"}</Text>
-      <Text>✅ 支付状态：{item.paid ? "已支付" : "未支付"}</Text>
+      <Text>入场时间：{item.entryTime}</Text>
+      <Text>出场时间：{item.exitTime ?? "尚未离场"}</Text>
+      <Text>停车时长：{item.durationMinutes ?? "–"} 分钟</Text>
+      <Text>费用：£{item.charge?.toFixed(2) ?? "–"}</Text>
+      <Text>支付状态：{item.paid ? "已支付" : "未支付"}</Text>
     </View>
   );
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>🧾 停车记录列表</Text>
+      <Text style={styles.header}>Parking History Record</Text>
       <FlatList data={records} keyExtractor={(item) => item.id} renderItem={renderItem} />
     </View>
   );

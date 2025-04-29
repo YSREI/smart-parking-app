@@ -18,14 +18,8 @@ export default function HomeScreen({ navigation }: any) {
         <Text style={styles.title}>Welcome to the Automated Parking System</Text>
   
         <Button
-          title="查看停车场状态"
-          onPress={() => navigation.navigate("ParkingLot", { lotId: "lot-a" })}
-        />
-        <View style={styles.spacer} />
-  
-        <Button
-          title=" 模拟停车进出流程"
-          onPress={() => navigation.navigate("ParkingAction")}
+          title="Chekc Car Park Live Status"
+          onPress={() => navigation.navigate("SelectLot")}
         />
         <View style={styles.spacer} />
   

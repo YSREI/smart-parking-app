@@ -6,9 +6,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import RegisterScreen from "./screens/RegisterScreen";
 import HomeScreen from "./screens/HomeScreen";
 import ParkingLotScreen from "./screens/ParkingLotScreen";
-import ParkingActionScreen from "./screens/ParkingActionScreen";
 import ParkingHistoryScreen from "./screens/ParkingHistoryScreen";
 import LoginScreen from "./screens/LoginScreen";
+import SelectLotScreen from "./screens/SelectLotScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,9 +34,9 @@ export default function App() {
         <Stack.Screen name="Register" component={RegisterScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ParkingLot" component={ParkingLotScreen} />
-        <Stack.Screen name="ParkingAction" component={ParkingActionScreen} />
         <Stack.Screen name="History" component={ParkingHistoryScreen} />
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="SelectLot" component={SelectLotScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

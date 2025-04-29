@@ -15,15 +15,12 @@ export default function RegisterScreen({ navigation }: any) {
   const [emailError, setEmailError] = useState("");
   const [plateError, setPlateError] = useState("");
   const [globalError, setGlobalError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
 
 
   const handleRegister = async () => {
-    setNameError("");
-    setPhoneError("");
-    setEmailError("");
-    setPlateError("");
-    setGlobalError("");
-  
+
     let hasError = false;
   
     //校对输入格式
@@ -55,7 +52,7 @@ export default function RegisterScreen({ navigation }: any) {
       setPlateError("License Plate is required");
       hasError = true;
     } else if (!/^[A-Z0-9]{5,12}$/.test(licensePlate)) {
-      setPlateError("License plate must contain only uppercase letters and digits (no spaces)");
+      setPlateError("License plate must contain only uppercase letters and digits (no spaces), and must be 5 to 12 characters long.");
       hasError = true;
     }
   
@@ -67,6 +64,29 @@ export default function RegisterScreen({ navigation }: any) {
   
 
     try {
+      // 先保存本地用户信息
+      await AsyncStorage.setItem("user", JSON.stringify({
+        email,
+        licensePlate: upperPlate,
+      }));
+      setNameError("");
+      setPhoneError("");
+      setEmailError("");
+      setPlateError("");
+      setGlobalError("");
+    
+      setSuccessMessage ("Registration successful!")
+      // 延迟1秒跳转
+      setTimeout(() => {
+        navigation.navigate("Home");
+      }, 2000);
+
+    } catch (error) {
+      console.error(error);
+      setSuccessMessage("");
+      setEmailError("Registration failed. Please try again later.");
+    }
+
       // 🔥 全局检查所有用户的license_plates，防止重复车牌
       const usersSnapshot = await get(usersRef);
       if (usersSnapshot.exists()) {
@@ -113,17 +133,7 @@ export default function RegisterScreen({ navigation }: any) {
         });
       }
 
-      await AsyncStorage.setItem("user", JSON.stringify({
-        email,
-        licensePlate: upperPlate,
-      }));
 
-      Alert.alert("Registration successful!");
-      navigation.navigate("Home");
-
-    } catch (error) {
-      Alert.alert("Registration failed", (error as any).message);
-    }
   };
 
   return (

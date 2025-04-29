@@ -27,10 +27,11 @@ export default function LoginScreen({ navigation }: any) {
     if (!licensePlate) {
       setPlateError("License Plate is required");
       hasError = true;
-    } else if (!/^[A-Z0-9 ]{5,12}$/.test(licensePlate)) {
-      setPlateError("License plate must contain only uppercase letters and digits (no spaces)");
+    } else if (!/^[A-Z0-9]{5,12}$/.test(licensePlate)) {
+      setPlateError("License plate must contain only uppercase letters and digits (no spaces), and must be 5 to 12 characters long.");
       hasError = true;
     }
+
     
     if (hasError) return;
     
@@ -41,7 +42,7 @@ export default function LoginScreen({ navigation }: any) {
     try {
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
-          Alert.alert("User does not exist, please register");
+          setEmailError("This email is not registered. Please register first.");
           return;
         }
       
@@ -51,7 +52,7 @@ export default function LoginScreen({ navigation }: any) {
         const licensePlates = userData.license_plates  || [];
 
         if (!licensePlates.includes(inputPlate)) {
-          Alert.alert("License plate does not match");
+          setPlateError("License plate does not match our records.");
           return;
         }
       
@@ -63,7 +64,7 @@ export default function LoginScreen({ navigation }: any) {
         navigation.reset({ index: 0, routes: [{ name: "Home" }] });
       
       } catch (error) {
-        Alert.alert("Login failed", (error as any).message);
+        setEmailError("Login failed. Please check your network connection or try again later.");
       }
     };
 
@@ -79,7 +80,7 @@ export default function LoginScreen({ navigation }: any) {
       autoCapitalize="none" />
       {emailError !== "" && <Text style = {styles.errorText}>{emailError}</Text>}
 
-      <Text style={styles.label}>License Plate (e.g. AB12 CDE)</Text>
+      <Text style={styles.label}>License Plate (e.g. AB12CDE)</Text>
       <TextInput 
       //placeholder="车牌号"
       style = {styles.input}
