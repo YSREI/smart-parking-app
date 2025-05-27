@@ -1,0 +1,6 @@
+"firebase_config.json" 
+node_modules/
+__pycache__/
+logs/
+recognition/
+tesseract/
