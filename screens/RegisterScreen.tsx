@@ -1,15 +1,19 @@
+// RegisterScreen.tsx
+
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
-import { ref, set, get, child } from "firebase/database";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
+import { ref, set, get } from "firebase/database";
 import { database } from "../firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function RegisterScreen({ navigation }: any) {
+  // state variables for user input fields
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
+   //state variables for validation error messages
   const [nameError, setNameError] = useState("");
   const [phoneError, setPhoneError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -19,11 +23,11 @@ export default function RegisterScreen({ navigation }: any) {
 
 
 
+  // handle registration process
   const handleRegister = async () => {
 
     let hasError = false;
   
-    //校对输入格式
     if (!name) {
       setNameError("Name is required");
       hasError = true;
@@ -56,6 +60,7 @@ export default function RegisterScreen({ navigation }: any) {
       hasError = true;
     }
   
+    // if any validation fails, stop registration
     if (hasError) return;
   
     const safeEmail = email.replace(".", "_");
@@ -64,7 +69,7 @@ export default function RegisterScreen({ navigation }: any) {
   
 
     try {
-      // 先保存本地用户信息
+      //Save user info to AsyncStorage for local session management
       await AsyncStorage.setItem("user", JSON.stringify({
         email,
         licensePlate: upperPlate,
@@ -76,7 +81,7 @@ export default function RegisterScreen({ navigation }: any) {
       setGlobalError("");
     
       setSuccessMessage ("Registration successful!")
-      // 延迟1秒跳转
+      // Navigate to Home screen after 2 seconds
       setTimeout(() => {
         navigation.navigate("Home");
       }, 2000);
@@ -87,7 +92,7 @@ export default function RegisterScreen({ navigation }: any) {
       setEmailError("Registration failed. Please try again later.");
     }
 
-      // 🔥 全局检查所有用户的license_plates，防止重复车牌
+      // Check if license plate already exists across all users
       const usersSnapshot = await get(usersRef);
       if (usersSnapshot.exists()) {
         const usersData = usersSnapshot.val();
@@ -104,14 +109,18 @@ export default function RegisterScreen({ navigation }: any) {
         }
       }
 
-      // 🔥 然后再继续注册流程
+      // Continue with registration process
       const userRef = ref(database, "users/" + safeEmail);
       const userSnapshot = await get(userRef);
 
+
+      // if user already exists, update their profile
       if (userSnapshot.exists()) {
         const existingUser = userSnapshot.val();
         const updatedLicensePlates = existingUser.license_plates || [];
 
+
+        // add new license plate if not already registered
         if (!updatedLicensePlates.includes(upperPlate)) {
           updatedLicensePlates.push(upperPlate);
         } else {
@@ -119,12 +128,14 @@ export default function RegisterScreen({ navigation }: any) {
           return;
         }
 
+        // update user data in Firebase
         await set(userRef, {
           ...existingUser,
           license_plates: updatedLicensePlates
         });
 
       } else {
+        // Create new user in Firebase
         await set(userRef, {
           name,
           phone,
@@ -136,12 +147,13 @@ export default function RegisterScreen({ navigation }: any) {
 
   };
 
+  // Render registration form with input fields and validation
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create an account</Text>
 
 
-      {/* 🔥 全局错误提示 */}
+      {/* Global error message display */}
       {globalError !== "" && <Text style={styles.errorText}>{globalError}</Text>}
 
 
@@ -151,7 +163,8 @@ export default function RegisterScreen({ navigation }: any) {
         style={styles.input}
         onChangeText={(text) => {
           setName(text);
-          setGlobalError("");//更改input时去掉错误信息
+          //Clear error when input changes
+          setGlobalError("");
         }}
       />
       {nameError !== "" && <Text style={styles.errorText}>{nameError}</Text>}
@@ -162,9 +175,11 @@ export default function RegisterScreen({ navigation }: any) {
         keyboardType="numeric"
         value={phone}
         onChangeText={(text) => {
+          // filter, numbers only
           const onlyNumbers = text.replace(/[^0-9]/g, '');
           setPhone(onlyNumbers);
-          setGlobalError("");//更改input时去掉错误信息
+          //Clear error when input changes
+          setGlobalError("");
         }}
       />
       {phoneError !== "" && <Text style={styles.errorText}>{phoneError}</Text>}
@@ -175,7 +190,8 @@ export default function RegisterScreen({ navigation }: any) {
         autoCapitalize="none"
         onChangeText={(text) =>{
           setEmail(text);
-          setGlobalError("");//更改input时去掉错误信息
+          //Clear error when input changes
+          setGlobalError("");
         }}
       />
       {emailError !== "" && <Text style={styles.errorText}>{emailError}</Text>}
@@ -186,9 +202,11 @@ export default function RegisterScreen({ navigation }: any) {
         value={licensePlate}
         autoCapitalize="characters"
         onChangeText={(text) => {
+          // remove non-alphanumeric characters and convert to uppercase
           const onlyLettersNumbers = text.replace(/[^A-Z0-9]/gi, '').toUpperCase();
           setLicensePlate(onlyLettersNumbers);
-          setGlobalError("");//更改input时去掉错误信息
+          //Clear error when input changes
+          setGlobalError("");
         }}
       />
       {plateError !== "" && <Text style={styles.errorText}>{plateError}</Text>}
@@ -200,6 +218,7 @@ export default function RegisterScreen({ navigation }: any) {
   );
 }
 
+// define styles for registration screen
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
   title: { fontSize: 24, marginBottom: 20, textAlign: "center" },

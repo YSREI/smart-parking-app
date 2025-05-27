@@ -1,3 +1,5 @@
+//App.tsx
+
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -13,8 +15,13 @@ import SelectLotScreen from "./screens/SelectLotScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  // State to determine which screen to shwo initially
   const [initialRoute, setInitialRoute] = useState<string | null>(null);
 
+
+  // check if user is logged in on app start
+  // if user data exists on AsynStorage, go to Home Screen
+  // Otherwise, go Login screen
   useEffect(() => {
     AsyncStorage.getItem("user").then((value) => {
       if (value) {
@@ -25,8 +32,7 @@ export default function App() {
     });
   }, []);
 
-//用于确定点开app时在什么界面
-  //if (!initialRoute) return null;
+//define all screens in the app
 
   return (
     <NavigationContainer>

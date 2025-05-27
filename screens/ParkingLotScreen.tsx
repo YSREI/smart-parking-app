@@ -1,58 +1,87 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, ImageBackground, ActivityIndicator } from "react-native";
-import { ref, onValue } from "firebase/database";
-import { database } from "../firebaseConfig";
-import lotCSpots from "../assets/camera8_spots.json";
+//ParkingLotScreen.tsx
 
-interface Space {
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, ImageBackground, ScrollView, ActivityIndicator } from "react-native";
+import { getDatabase, ref, onValue } from "firebase/database";
+import { useRoute } from "@react-navigation/native";
+import lotCSpotsData from "../assets/camera8_spots.json";
+
+// interface for parking spot coordinates
+interface Spot {
   id: string;
-  status: "occupied" | "empty";
+  coords: number[][];
 }
 
-export default function ParkingLotScreen({ route }: any) {
-  const { lotId } = route.params;
-  const [spaces, setSpaces] = useState<Space[]>([]);
-  const [imageLoaded, setImageLoaded] = useState(false);
+//interface for parking space status
+interface Space {
+  id: string;
+  status: string;
+}
 
+const ParkingLotScreen = () => {
+  // get lot ID from navigation parameters
+  const route = useRoute();
+  const { lotId } = route.params as { lotId: string };
+
+  // state variables
+  const [spaces, setSpaces] = useState<Space[]>([]);
+  const [lotCSpots, setLotCSpots] = useState<Spot[]>([]);
+  const [imageLayout, setImageLayout] = useState({ width: 1000, height: 750 });
+  const [loading, setLoading] = useState(true);
+
+
+  // fetch realtime parking spaces data from Firebase
   useEffect(() => {
-    const lotRef = ref(database, `parking-lots/${lotId}/spaces`);
-    return onValue(lotRef, (snapshot) => {
+    const db = getDatabase();
+    const spacesRef = ref(db, `parking-lots/${lotId}/spaces`);
+
+    // subscribe to realtime updates from Firebase
+    const unsubscribe = onValue(spacesRef, (snapshot) => {
       const data = snapshot.val();
       if (data) {
-        const parsed = Object.entries(data).map(([id, val]: any) => ({
+        const parsedSpaces = Object.entries(data).map(([id, value]: [string, any]) => ({
           id,
-          status: val.status,
+          status: value.status,
         }));
-        setSpaces(parsed);
+        setSpaces(parsedSpaces);
+      } else {
+        setSpaces([]);
       }
+      setLoading(false);
     });
+
+    // cleanup subscription
+    return () => unsubscribe();
   }, [lotId]);
 
-  const renderLotAItem = ({ item }: any) => (
-    <View
-      style={[
-        styles.spaceBox,
-        { backgroundColor: item.status === "occupied" ? "#ff4d4d" : "#4caf50" },
-      ]}
-    />
-  );
+  // load spot coordinates for lot C
+  useEffect(() => {
+    // Only process lot-c background image and coordinate
+    if (lotId === "lot-c") {
+      setLotCSpots(lotCSpotsData || []);
+  }}, [lotId]);
 
-  const renderLotCSpaces = () => {
-    if (!imageLoaded) {
-      return <ActivityIndicator size="large" color="#0000ff" style={{ marginTop: 50 }} />;
-    }
+  // render parking spaces on the background image
+  const renderParkingSpaces = () => {
+    // scaling
+    const scaleX = imageLayout.width / 1000;
+    const scaleY = imageLayout.height / 750;
 
-    return lotCSpots.map((spot: any) => {
+    //render each parking spot with red/green colour based on status
+    return lotCSpots.map((spot) => {
       const matchedSpace = spaces.find((s) => s.id === spot.id);
-      const status = matchedSpace?.status || "empty";
+      const status = matchedSpace?.status ?? "empty";
+      const backgroundColor = status === "occupied" ? "red" : "lime";
 
-      const xs = spot.coords.map((c: any) => c[0]);
-      const ys = spot.coords.map((c: any) => c[1]);
-      const left = Math.min(...xs);
-      const top = Math.min(...ys);
-      const width = Math.max(...xs) - Math.min(...xs);
-      const height = Math.max(...ys) - Math.min(...ys);
+      // Calculate position and dimensions based on coordinates
+      const xs = spot.coords.map((c) => c[0]);
+      const ys = spot.coords.map((c) => c[1]);
+      const left = Math.min(...xs) * scaleX;
+      const top = Math.min(...ys) * scaleY;
+      const width = (Math.max(...xs) - Math.min(...xs)) * scaleX;
+      const height = (Math.max(...ys) - Math.min(...ys)) * scaleY;
 
+      // render parking spot overlay
       return (
         <View
           key={spot.id}
@@ -62,61 +91,63 @@ export default function ParkingLotScreen({ route }: any) {
             top,
             width,
             height,
-            backgroundColor: status === "occupied" ? "rgba(255,0,0,0.5)" : "rgba(0,255,0,0.5)",
+            backgroundColor,
+            opacity: 0.5,
             borderWidth: 1,
             borderColor: "white",
-            borderRadius: 2,
           }}
         />
       );
     });
   };
 
-  if (lotId === "lot-a") {
+
+  // show loading indicator while data is fetching
+  if (loading) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Car Park A Status</Text>
-        <FlatList
-          data={spaces}
-          keyExtractor={(item) => item.id}
-          numColumns={4}
-          renderItem={renderLotAItem}
-          contentContainerStyle={styles.grid}
-        />
+      <View style={styles.centered}>
+        <ActivityIndicator size="large" color="#0000ff" />
       </View>
     );
   }
 
-  if (lotId === "lot-c") {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Car Park C Status</Text>
-        <View style={styles.backgroundWrapper}>
-          <ImageBackground
-            source={require("../assets/carpark8_background.png")}
-            style={styles.background}
-            resizeMode="contain"
-            onLoad={() => setImageLoaded(true)}
-          >
-            {renderLotCSpaces()}
-          </ImageBackground>
-        </View>
-      </View>
-    );
-  }
-
+  // render parking lot with background image and space overlays
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Unknown Lot</Text>
-    </View>
+    <ScrollView contentContainerStyle={styles.container}>
+      <Text style={styles.title}>Car Park C Status</Text>
+      <ImageBackground
+        source={require("../assets/carpark8_background.png")}
+        style={{ width: "100%", aspectRatio: 1000 / 750, maxWidth: 1000, alignSelf:"center" }}
+        onLayout={(event) => {
+          // Get actual rendered dimensions for scaling calculations
+          const { width, height } = event.nativeEvent.layout;
+          setImageLayout({ width, height });
+        }}
+      >
+        {renderParkingSpaces()}
+      </ImageBackground>
+    </ScrollView>
   );
-}
+};
 
+// define styles for parking lot screen
 const styles = StyleSheet.create({
-  container: { flex: 1, paddingTop: 60, alignItems: "center", justifyContent: "center" },
-  title: { fontSize: 20, marginBottom: 20 },
-  grid: { alignItems: "center" },
-  spaceBox: { width: 60, height: 60, margin: 8, borderRadius: 8 },
-  backgroundWrapper: { width: 1000, height: 750, alignItems: "center", justifyContent: "center" },
-  background: { width: 1000, height: 750 },
+  container: {
+    flexGrow: 1,
+    padding: 10,
+    alignItems: "center",
+    backgroundColor: "#f4f4f4",
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginVertical: 10,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
 });
+
+export default ParkingLotScreen;

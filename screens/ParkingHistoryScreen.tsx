@@ -1,9 +1,12 @@
+// ParkingHistoryScreen.tsx
+
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, StyleSheet, Alert } from "react-native";
+import { View, Text, FlatList, StyleSheet} from "react-native";
 import { ref, onValue } from "firebase/database";
 import { database } from "../firebaseConfig";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+// interface for parking record data
 interface RecordItem {
   id: string;
   entryTime: string;
@@ -14,26 +17,31 @@ interface RecordItem {
 }
 
 export default function ParkingHistoryScreen() {
+  // State variables
   const [records, setRecords] = useState<RecordItem[]>([]);
   const [licensePlate, setLicensePlate] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
-  // ✅ 第一步：从 AsyncStorage 读取当前车牌号
+  // Get the current user's license plate from AsyncStorage
   useEffect(() => {
     AsyncStorage.getItem("user").then((data) => {
       if (data) {
         const parsed = JSON.parse(data);
         setLicensePlate(parsed.licensePlate);
       } else {
-        Alert.alert("⚠️ 无法识别用户身份");
+        setErrorMessage("Unable to identify user.");
       }
     });
   }, []);
 
-  // 监听当前车牌下的停车记录
+  // listen for parking records for the current account
   useEffect(() => {
     if (!licensePlate) return;
 
+    // set up Firebase reference to user's parking records
     const userRef = ref(database, `parking-records/${licensePlate}`);
+
+    // subscribe to realtime updates from Firebase
     return onValue(userRef, (snapshot) => {
       const data = snapshot.val();
       if (!data) {
@@ -41,6 +49,7 @@ export default function ParkingHistoryScreen() {
         return;
       }
 
+      // parse and sort
       const parsed = Object.entries(data).map(([id, value]: any) => ({
         id,
         ...value,
@@ -49,25 +58,30 @@ export default function ParkingHistoryScreen() {
     });
   }, [licensePlate]);
 
+   // render each parking record item
   const renderItem = ({ item }: { item: RecordItem }) => (
     <View style={styles.card}>
-      <Text style={styles.title}>🅿️ 记录编号：{item.id}</Text>
-      <Text>入场时间：{item.entryTime}</Text>
-      <Text>出场时间：{item.exitTime ?? "尚未离场"}</Text>
-      <Text>停车时长：{item.durationMinutes ?? "–"} 分钟</Text>
-      <Text>费用：£{item.charge?.toFixed(2) ?? "–"}</Text>
-      <Text>支付状态：{item.paid ? "已支付" : "未支付"}</Text>
+      <Text style={styles.title}>Record ID：{item.id}</Text>
+      <Text>Entry Time: {item.entryTime}</Text>
+      <Text>Exit Time: {item.exitTime ?? "Not leaving yet"}</Text>
+      <Text>Duration: {item.durationMinutes ?? "–"} mintues</Text>
+      <Text>Amount Due: £{item.charge?.toFixed(2) ?? "–"}</Text>
+      <Text>Paid: {item.paid ? "true" : "false"}</Text>
     </View>
   );
 
+
+  // render parking history screen
   return (
     <View style={styles.container}>
       <Text style={styles.header}>Parking History Record</Text>
       <FlatList data={records} keyExtractor={(item) => item.id} renderItem={renderItem} />
+      {errorMessage !== "" && <Text style={{ color: "red", marginBottom: 12 }}>{errorMessage}</Text>}
     </View>
   );
 }
 
+// define styles for parking history screen
 const styles = StyleSheet.create({
   container: { flex: 1, paddingTop: 60, paddingHorizontal: 16 },
   header: { fontSize: 20, fontWeight: "bold", marginBottom: 20 },

@@ -1,21 +1,32 @@
+// LoginScreen.tsx
+// This screen handles user login with email and passwor by checking Firebase Realtime Database
+// It validates both email and car plate, and stores user info using AsyncStorage.
+
+
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert, StyleSheet } from "react-native";
+import { View, Text, TextInput, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ref, get, set } from "firebase/database";
+import { ref, get } from "firebase/database";
 import { database } from "../firebaseConfig";
 
 export default function LoginScreen({ navigation }: any) {
+  // state variables to store user inputs
   const [email, setEmail] = useState("");
   const [licensePlate, setLicensePlate] = useState("");
+  //state variables to store validation error messages
   const [emailError, setEmailError] = useState("");
   const [plateError, setPlateError] = useState("");
 
+
+  // handle login process
   const handleLogin = async () => {
+    // reset error messages
     setEmailError("");
     setPlateError("");
 
     let hasError = false;
 
+    // validate email formaet
     if (!email) {
       setEmailError("Email is required");
       hasError = true;
@@ -24,6 +35,7 @@ export default function LoginScreen({ navigation }: any) {
       hasError = true;
     }
 
+    // validate license plate format
     if (!licensePlate) {
       setPlateError("License Plate is required");
       hasError = true;
@@ -32,14 +44,15 @@ export default function LoginScreen({ navigation }: any) {
       hasError = true;
     }
 
-    
+    // if validation fails, stop login process
     if (hasError) return;
     
-
+    // replace dots in email with underscore for firebase path
     const safeEmail = email.replace(".", "_");
     const userRef = ref(database, `users/${safeEmail}`);
 
     try {
+      // check if user exists in database
         const snapshot = await get(userRef);
         if (!snapshot.exists()) {
           setEmailError("This email is not registered. Please register first.");
@@ -49,32 +62,37 @@ export default function LoginScreen({ navigation }: any) {
         const userData = snapshot.val();
         const inputPlate = licensePlate.toUpperCase();
       
+        // get user's registered license plates
         const licensePlates = userData.license_plates  || [];
 
+        // verify license plates
         if (!licensePlates.includes(inputPlate)) {
           setPlateError("License plate does not match our records.");
           return;
         }
       
+        // Store user info in AsyncStorage for session 
         await AsyncStorage.setItem("user", JSON.stringify({
           email,
           licensePlate: inputPlate,
         }));
       
+        // Navigate to Home screen and reset navigation stack
         navigation.reset({ index: 0, routes: [{ name: "Home" }] });
       
       } catch (error) {
+        // handle login errors
         setEmailError("Login failed. Please check your network connection or try again later.");
       }
     };
 
+  // Render login form with input fields and validation
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Login to your account</Text>
 
       <Text style={styles.label}>Email (e.g. 123456@gmail.com)</Text>
       <TextInput 
-      //placeholder="邮箱" 
       style={styles.input} 
       onChangeText={setEmail} 
       autoCapitalize="none" />
@@ -82,11 +100,11 @@ export default function LoginScreen({ navigation }: any) {
 
       <Text style={styles.label}>License Plate (e.g. AB12CDE)</Text>
       <TextInput 
-      //placeholder="车牌号"
       style = {styles.input}
       autoCapitalize="characters"
       onChangeText={(text) => {
-        const onlyLettersNumbers = text.replace(/[^A-Z0-9]/gi, '').toUpperCase(); // 只保留字母数字并转大写
+        // Remove non-alphanumeric characters and convert to uppercase
+        const onlyLettersNumbers = text.replace(/[^A-Z0-9]/gi, '').toUpperCase(); 
         setLicensePlate(onlyLettersNumbers);
       }}
       value={licensePlate}/>
@@ -99,6 +117,7 @@ export default function LoginScreen({ navigation }: any) {
   );
 }
 
+// define styles for login screen
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: "center", padding: 20 },
   title: { fontSize: 24, marginBottom: 20 },

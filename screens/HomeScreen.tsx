@@ -1,10 +1,13 @@
+// HomeScreen.tsx
+
 import React from "react";
 import { View, Text, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 
 export default function HomeScreen({ navigation }: any) {
-    // 退出登录函数
+    // Handle logout by removing user data from AsyncStorage
+    // reset navigation to show Login screen
     const handleLogout = async () => {
       await AsyncStorage.removeItem("user");
       navigation.reset({
@@ -13,12 +16,13 @@ export default function HomeScreen({ navigation }: any) {
       });
     };
   
+    // main home screen with navigation options
     return (
       <View style={styles.container}>
-        <Text style={styles.title}>Welcome to the Automated Parking System</Text>
+        <Text style={[styles.title, { textAlign: "center" }]}>Welcome to the Automated Parking System</Text>
   
         <Button
-          title="Chekc Car Park Live Status"
+          title="Car Park Live Status"
           onPress={() => navigation.navigate("SelectLot")}
         />
         <View style={styles.spacer} />
@@ -38,6 +42,7 @@ export default function HomeScreen({ navigation }: any) {
     );
   }
   
+  // define styles for the home screen
   const styles = StyleSheet.create({
     container: { flex: 1, justifyContent: "center", alignItems: "center", paddingHorizontal: 20 },
     title: { fontSize: 22, marginBottom: 30, fontWeight: "bold" },
