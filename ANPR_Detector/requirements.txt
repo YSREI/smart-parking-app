@@ -1,0 +1,7 @@
+# requirements.txt 
+
+ultralytics==8.3.116
+opencv-python==4.11.0.86
+numpy==2.1.1
+pytesseract==0.3.13
+firebase-admin==6.8.0

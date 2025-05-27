@@ -1,0 +1,10 @@
+path: C:/Users/yushi/OneDrive/Desktop/final-project/final
+#461 images
+train: images/train
+#55 images
+val: images/valid
+#25 images
+test: images/test
+
+nc: 1
+names: ["license_plate"]
