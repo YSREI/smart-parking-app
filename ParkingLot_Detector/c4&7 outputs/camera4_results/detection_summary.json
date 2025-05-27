@@ -1,0 +1,32 @@
+{
+    "1.jpg": {
+        "total_spots": 37,
+        "occupied": 21,
+        "empty": 16,
+        "occupancy_rate": 0.5675675675675675
+    },
+    "2.jpg": {
+        "total_spots": 37,
+        "occupied": 7,
+        "empty": 30,
+        "occupancy_rate": 0.1891891891891892
+    },
+    "3.jpg": {
+        "total_spots": 37,
+        "occupied": 33,
+        "empty": 4,
+        "occupancy_rate": 0.8918918918918919
+    },
+    "4.jpg": {
+        "total_spots": 37,
+        "occupied": 36,
+        "empty": 1,
+        "occupancy_rate": 0.972972972972973
+    },
+    "5.jpg": {
+        "total_spots": 37,
+        "occupied": 33,
+        "empty": 4,
+        "occupancy_rate": 0.8918918918918919
+    }
+}

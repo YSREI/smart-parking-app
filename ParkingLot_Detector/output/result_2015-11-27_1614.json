@@ -1,0 +1,218 @@
+{
+    "613": {
+        "status": "empty",
+        "confidence": 0.9247423410415649
+    },
+    "614": {
+        "status": "empty",
+        "confidence": 0.998607337474823
+    },
+    "615": {
+        "status": "occupied",
+        "confidence": 0.9999992847442627
+    },
+    "211": {
+        "status": "occupied",
+        "confidence": 0.9851935505867004
+    },
+    "212": {
+        "status": "occupied",
+        "confidence": 0.9999991655349731
+    },
+    "213": {
+        "status": "occupied",
+        "confidence": 0.9999985694885254
+    },
+    "214": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "215": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "216": {
+        "status": "occupied",
+        "confidence": 0.9999997615814209
+    },
+    "217": {
+        "status": "occupied",
+        "confidence": 0.9999992847442627
+    },
+    "244": {
+        "status": "empty",
+        "confidence": 0.6628738045692444
+    },
+    "245": {
+        "status": "occupied",
+        "confidence": 0.9999898672103882
+    },
+    "246": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "247": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "248": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "249": {
+        "status": "occupied",
+        "confidence": 0.9625160098075867
+    },
+    "250": {
+        "status": "occupied",
+        "confidence": 0.9999998807907104
+    },
+    "251": {
+        "status": "occupied",
+        "confidence": 0.9671488404273987
+    },
+    "252": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "253": {
+        "status": "occupied",
+        "confidence": 0.9999998807907104
+    },
+    "254": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "255": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "280": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "281": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "282": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "283": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "284": {
+        "status": "empty",
+        "confidence": 0.8954606056213379
+    },
+    "285": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "286": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "287": {
+        "status": "occupied",
+        "confidence": 0.9999998807907104
+    },
+    "288": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "289": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "290": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "291": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "292": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "293": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "313": {
+        "status": "occupied",
+        "confidence": 0.9497754573822021
+    },
+    "314": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "315": {
+        "status": "occupied",
+        "confidence": 0.9996987581253052
+    },
+    "316": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "317": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "318": {
+        "status": "occupied",
+        "confidence": 0.9999929666519165
+    },
+    "319": {
+        "status": "occupied",
+        "confidence": 0.9999996423721313
+    },
+    "320": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "321": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "322": {
+        "status": "empty",
+        "confidence": 0.9652293920516968
+    },
+    "323": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "324": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "325": {
+        "status": "empty",
+        "confidence": 0.8756977319717407
+    },
+    "326": {
+        "status": "empty",
+        "confidence": 0.8893420100212097
+    },
+    "327": {
+        "status": "occupied",
+        "confidence": 0.9999953508377075
+    },
+    "328": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "329": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "330": {
+        "status": "occupied",
+        "confidence": 1.0
+    }
+}

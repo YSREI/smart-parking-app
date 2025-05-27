@@ -1,0 +1,189 @@
+{
+    "timestamp": "2025-02-27T15:13:55.421036",
+    "spots": {
+        "P611": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P612": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P206": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P207": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P208": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P209": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P210": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P211": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P238": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P239": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P240": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P241": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P242": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P243": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P244": {
+            "status": "empty",
+            "confidence": 0.9973734617233276
+        },
+        "P245": {
+            "status": "empty",
+            "confidence": 0.999955415725708
+        },
+        "P246": {
+            "status": "empty",
+            "confidence": 0.9998171925544739
+        },
+        "P247": {
+            "status": "empty",
+            "confidence": 0.6963372826576233
+        },
+        "P248": {
+            "status": "occupied",
+            "confidence": 0.9710379838943481
+        },
+        "P274": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P275": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P276": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P277": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P278": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P279": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P280": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P281": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P282": {
+            "status": "empty",
+            "confidence": 0.9996700286865234
+        },
+        "P283": {
+            "status": "empty",
+            "confidence": 0.999716579914093
+        },
+        "P284": {
+            "status": "empty",
+            "confidence": 0.9999995231628418
+        },
+        "P285": {
+            "status": "empty",
+            "confidence": 0.9991944432258606
+        },
+        "P286": {
+            "status": "empty",
+            "confidence": 0.9513759613037109
+        },
+        "P309": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P310": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P311": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P312": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P313": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P314": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P315": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P316": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P317": {
+            "status": "empty",
+            "confidence": 0.9974610805511475
+        },
+        "P318": {
+            "status": "empty",
+            "confidence": 0.999811589717865
+        },
+        "P319": {
+            "status": "empty",
+            "confidence": 0.9839567542076111
+        },
+        "P320": {
+            "status": "empty",
+            "confidence": 0.9236563444137573
+        },
+        "P321": {
+            "status": "occupied",
+            "confidence": 0.8537125587463379
+        },
+        "P322": {
+            "status": "occupied",
+            "confidence": 0.7733027935028076
+        }
+    }
+}

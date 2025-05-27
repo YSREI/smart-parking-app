@@ -1,0 +1,218 @@
+{
+    "613": {
+        "status": "empty",
+        "confidence": 0.9655742645263672
+    },
+    "614": {
+        "status": "empty",
+        "confidence": 0.9977167844772339
+    },
+    "615": {
+        "status": "occupied",
+        "confidence": 0.9665791392326355
+    },
+    "211": {
+        "status": "occupied",
+        "confidence": 0.999377965927124
+    },
+    "212": {
+        "status": "empty",
+        "confidence": 0.9997625946998596
+    },
+    "213": {
+        "status": "empty",
+        "confidence": 0.9816684126853943
+    },
+    "214": {
+        "status": "empty",
+        "confidence": 0.9996227025985718
+    },
+    "215": {
+        "status": "occupied",
+        "confidence": 0.9999973773956299
+    },
+    "216": {
+        "status": "empty",
+        "confidence": 0.9998730421066284
+    },
+    "217": {
+        "status": "empty",
+        "confidence": 0.9855834245681763
+    },
+    "244": {
+        "status": "empty",
+        "confidence": 0.999998927116394
+    },
+    "245": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "246": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "247": {
+        "status": "empty",
+        "confidence": 0.9999996423721313
+    },
+    "248": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "249": {
+        "status": "empty",
+        "confidence": 0.9999790191650391
+    },
+    "250": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "251": {
+        "status": "empty",
+        "confidence": 0.9999990463256836
+    },
+    "252": {
+        "status": "empty",
+        "confidence": 0.9999979734420776
+    },
+    "253": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "254": {
+        "status": "empty",
+        "confidence": 0.9999978542327881
+    },
+    "255": {
+        "status": "empty",
+        "confidence": 0.9999731779098511
+    },
+    "280": {
+        "status": "empty",
+        "confidence": 0.9910455346107483
+    },
+    "281": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "282": {
+        "status": "empty",
+        "confidence": 0.9999982118606567
+    },
+    "283": {
+        "status": "empty",
+        "confidence": 0.9987592697143555
+    },
+    "284": {
+        "status": "empty",
+        "confidence": 0.9999990463256836
+    },
+    "285": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "286": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "287": {
+        "status": "empty",
+        "confidence": 0.9999641180038452
+    },
+    "288": {
+        "status": "occupied",
+        "confidence": 0.999998927116394
+    },
+    "289": {
+        "status": "empty",
+        "confidence": 0.9999948740005493
+    },
+    "290": {
+        "status": "empty",
+        "confidence": 0.9999662637710571
+    },
+    "291": {
+        "status": "empty",
+        "confidence": 0.9999970197677612
+    },
+    "292": {
+        "status": "empty",
+        "confidence": 0.9999991655349731
+    },
+    "293": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "313": {
+        "status": "empty",
+        "confidence": 0.9999970197677612
+    },
+    "314": {
+        "status": "empty",
+        "confidence": 0.9999761581420898
+    },
+    "315": {
+        "status": "empty",
+        "confidence": 0.9856875538825989
+    },
+    "316": {
+        "status": "empty",
+        "confidence": 0.9999996423721313
+    },
+    "317": {
+        "status": "empty",
+        "confidence": 0.9999982118606567
+    },
+    "318": {
+        "status": "empty",
+        "confidence": 0.9999890327453613
+    },
+    "319": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "320": {
+        "status": "empty",
+        "confidence": 0.5574615597724915
+    },
+    "321": {
+        "status": "empty",
+        "confidence": 0.9996826648712158
+    },
+    "322": {
+        "status": "empty",
+        "confidence": 0.9999517202377319
+    },
+    "323": {
+        "status": "empty",
+        "confidence": 0.9999760389328003
+    },
+    "324": {
+        "status": "empty",
+        "confidence": 0.9994220733642578
+    },
+    "325": {
+        "status": "empty",
+        "confidence": 0.9998534917831421
+    },
+    "326": {
+        "status": "empty",
+        "confidence": 0.9999915361404419
+    },
+    "327": {
+        "status": "empty",
+        "confidence": 0.9999877214431763
+    },
+    "328": {
+        "status": "empty",
+        "confidence": 0.9999997615814209
+    },
+    "329": {
+        "status": "empty",
+        "confidence": 0.9818655848503113
+    },
+    "330": {
+        "status": "empty",
+        "confidence": 0.6111082434654236
+    }
+}

@@ -1,0 +1,186 @@
+{
+    "611": {
+        "status": "occupied",
+        "confidence": 0.8772116303443909
+    },
+    "612": {
+        "status": "empty",
+        "confidence": 0.9991130232810974
+    },
+    "206": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "207": {
+        "status": "empty",
+        "confidence": 1.0
+    },
+    "208": {
+        "status": "occupied",
+        "confidence": 0.9887942671775818
+    },
+    "209": {
+        "status": "occupied",
+        "confidence": 0.9906412959098816
+    },
+    "210": {
+        "status": "occupied",
+        "confidence": 0.9999990463256836
+    },
+    "211": {
+        "status": "empty",
+        "confidence": 0.9991298317909241
+    },
+    "238": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "239": {
+        "status": "occupied",
+        "confidence": 0.9990597367286682
+    },
+    "240": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "241": {
+        "status": "occupied",
+        "confidence": 0.9999847412109375
+    },
+    "242": {
+        "status": "occupied",
+        "confidence": 0.9908276200294495
+    },
+    "243": {
+        "status": "occupied",
+        "confidence": 0.9999997615814209
+    },
+    "244": {
+        "status": "occupied",
+        "confidence": 0.999998927116394
+    },
+    "245": {
+        "status": "occupied",
+        "confidence": 1.0
+    },
+    "246": {
+        "status": "occupied",
+        "confidence": 0.9999966621398926
+    },
+    "247": {
+        "status": "occupied",
+        "confidence": 0.9998698234558105
+    },
+    "248": {
+        "status": "occupied",
+        "confidence": 0.9999399185180664
+    },
+    "274": {
+        "status": "occupied",
+        "confidence": 0.9998335838317871
+    },
+    "275": {
+        "status": "occupied",
+        "confidence": 0.9991037249565125
+    },
+    "276": {
+        "status": "occupied",
+        "confidence": 0.9839985370635986
+    },
+    "277": {
+        "status": "occupied",
+        "confidence": 0.9663995504379272
+    },
+    "278": {
+        "status": "empty",
+        "confidence": 0.5599634051322937
+    },
+    "279": {
+        "status": "empty",
+        "confidence": 0.770734965801239
+    },
+    "280": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "281": {
+        "status": "occupied",
+        "confidence": 0.7282323837280273
+    },
+    "282": {
+        "status": "occupied",
+        "confidence": 0.9999972581863403
+    },
+    "283": {
+        "status": "occupied",
+        "confidence": 0.9999964237213135
+    },
+    "284": {
+        "status": "empty",
+        "confidence": 0.9999359846115112
+    },
+    "285": {
+        "status": "occupied",
+        "confidence": 0.9903784990310669
+    },
+    "286": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "309": {
+        "status": "occupied",
+        "confidence": 0.996123731136322
+    },
+    "310": {
+        "status": "occupied",
+        "confidence": 0.9999804496765137
+    },
+    "311": {
+        "status": "empty",
+        "confidence": 0.5824319124221802
+    },
+    "312": {
+        "status": "empty",
+        "confidence": 0.9999915361404419
+    },
+    "313": {
+        "status": "empty",
+        "confidence": 0.999996542930603
+    },
+    "314": {
+        "status": "occupied",
+        "confidence": 0.9999998807907104
+    },
+    "315": {
+        "status": "occupied",
+        "confidence": 0.9999988079071045
+    },
+    "316": {
+        "status": "empty",
+        "confidence": 0.9999903440475464
+    },
+    "317": {
+        "status": "empty",
+        "confidence": 0.9999997615814209
+    },
+    "318": {
+        "status": "empty",
+        "confidence": 0.9999998807907104
+    },
+    "319": {
+        "status": "empty",
+        "confidence": 0.999977707862854
+    },
+    "320": {
+        "status": "empty",
+        "confidence": 0.9999669790267944
+    },
+    "321": {
+        "status": "occupied",
+        "confidence": 0.9999935626983643
+    },
+    "322": {
+        "status": "empty",
+        "confidence": 0.9998756647109985
+    }
+}

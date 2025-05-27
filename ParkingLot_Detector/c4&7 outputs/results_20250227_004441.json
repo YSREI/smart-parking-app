@@ -1,0 +1,153 @@
+{
+    "timestamp": "2025-02-27T00:44:41.358690",
+    "spots": {
+        "P606": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P607": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P608": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P192": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P193": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P194": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P195": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P196": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P221": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P222": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P223": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P224": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P225": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P226": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P227": {
+            "status": "occupied",
+            "confidence": 0.9480586647987366
+        },
+        "P228": {
+            "status": "occupied",
+            "confidence": 0.9551526308059692
+        },
+        "P229": {
+            "status": "occupied",
+            "confidence": 0.9999990463256836
+        },
+        "P230": {
+            "status": "occupied",
+            "confidence": 0.9999992847442627
+        },
+        "P231": {
+            "status": "empty",
+            "confidence": 0.9991808533668518
+        },
+        "P262": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P263": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P264": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P265": {
+            "status": "empty",
+            "confidence": 0.9992276430130005
+        },
+        "P266": {
+            "status": "empty",
+            "confidence": 0.9995319843292236
+        },
+        "P267": {
+            "status": "empty",
+            "confidence": 0.9998495578765869
+        },
+        "P268": {
+            "status": "empty",
+            "confidence": 0.9964600205421448
+        },
+        "P269": {
+            "status": "empty",
+            "confidence": 0.9999984502792358
+        },
+        "P297": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P298": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P299": {
+            "status": "empty",
+            "confidence": 0.9848968982696533
+        },
+        "P300": {
+            "status": "empty",
+            "confidence": 0.994861900806427
+        },
+        "P301": {
+            "status": "occupied",
+            "confidence": 0.9999980926513672
+        },
+        "P302": {
+            "status": "occupied",
+            "confidence": 0.8130331039428711
+        },
+        "P303": {
+            "status": "occupied",
+            "confidence": 0.9998832941055298
+        },
+        "P304": {
+            "status": "occupied",
+            "confidence": 0.9999992847442627
+        },
+        "P305": {
+            "status": "occupied",
+            "confidence": 0.9899150133132935
+        },
+        "P306": {
+            "status": "occupied",
+            "confidence": 1.0
+        }
+    }
+}
