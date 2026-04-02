@@ -66,3 +66,12 @@ The project focuses on real-world feasibility, edge device integration, Firebase
 | [`smart-parking-app`](https://github.com/YSREI/smart-parking-app) | Mobile user app                 |
 | [`ANPR_Detector`](https://github.com/YSREI/ANPR_Detector)    | Plate detection and recognition |
 | [`ParkingLot-Detector`](https://github.com/YSREI/ParkingLot-Detector) | Parking space status detection  |
+
+
+
+## Dependency & Maintenance Notes
+
+- This project was originally developed as part of my undergraduate dissertation and uses an older Expo / React Native setup.
+- Some vulnerabilities may remain in the dependency tree after running `npm audit fix`. These are mainly related to legacy Expo tooling and development dependencies rather than the core application logic.
+- Resolving all vulnerabilities would require upgrading to newer Expo SDK versions, which introduce breaking changes and are outside the scope of this project.
+- The system remains fully functional for demonstration purposes, and the current setup has been intentionally preserved to reflect the original implementation.
